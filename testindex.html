@@ -1,0 +1,15 @@
+<script type="module">
+    import {fetchJSON} from "https://js.sabae.cc/fetchJSON.js";
+    bichi.onclick=async()=>{
+        const data=await fetchJSON("api/get-b",num.value);
+        console.log(data);
+    }
+    river.onclick=async()=>{
+        const data=await fetchJSON("api/get-r",num.value);
+        console.log(data);
+    }
+
+</script>
+ID:<input type =text id=num><br>
+<button id=bichi>bichi</button>
+<button id=river>river</button>
