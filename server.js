@@ -51,10 +51,13 @@ class MyServer extends Server{
         } else if (path == "/api/blist") {
             //掲示板の内容を返却
             //call:("/api/blist"),return:[data{未定}, ...]
+
             return board;
         } else if (path=="/api/get-allID"){
             //
             //call:("/api/get-allID",mode),return:[{ID,name}, ...]
+            //mode:"b" or "beach",return:beach[{ID,name,img}, ...]
+            //mode:"r" or "river",return:river[{ID,name,img}, ...]
             let data=[];
             if(req=="b" || req=="beach"){
                 for(const d of beach){
@@ -86,5 +89,5 @@ class MyServer extends Server{
     }
 }
 
-new MyServer(8884);
+new MyServer(8889);
 //https://t.co/2HQumqjel8?
