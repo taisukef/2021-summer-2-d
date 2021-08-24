@@ -9,6 +9,10 @@ let river=jsonfs.read(riverfn)|[];
 
 class MyServer extends Server{
     api(path,req){
-        
+        if(path == "/api/get-b"){
+
+        }else if(path == "/api/get-r"){
+
+        }
     }
 }
