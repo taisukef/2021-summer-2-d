@@ -8,8 +8,14 @@
         const data=await fetchJSON("api/get-r",num.value);
         console.log(data);
     }
+    weather.onclick=async()=>{
+        const data=await fetchJSON("api/get-w");
+        console.log(data);
+    }
 
 </script>
 ID:<input type =text id=num><br>
 <button id=bichi>bichi</button>
 <button id=river>river</button>
+<br>
+<button id=weather>weather</button>
