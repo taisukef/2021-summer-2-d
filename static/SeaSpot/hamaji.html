@@ -8,7 +8,7 @@
     </head>
     <body>
         <h1>浜地海水浴場</h1>
-        <img src="hamaji.jpg"width="">
+        <img src="../img/hamaji.jpg">
         詳細？<br>
 
         <h1>
@@ -23,6 +23,7 @@
           
             const addButton= document.getElementById('add-button');
         addButton.addEventListener('click', ()=>{
+            const id=prompt("idを入力");
             const input=document.getElementById('nm');
             console.log(input.value);
             //export使う？
@@ -36,6 +37,7 @@
 
             const ul=document.querySelector('ul');
             ul.appendChild(li);
+           
 
         }); 
         
