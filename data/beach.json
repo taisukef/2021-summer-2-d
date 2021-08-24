@@ -5,27 +5,27 @@
         "lat":36.249935181355134, 
         "lng":136.16146732608425,
         "info":"",
-        "img":""
+        "img":"static/img/hamaji.jpg"
     },{
         "ID":2,
         "name":"三国さんセットビーチ",
         "lat":36.22315134396832, 
         "lng":136.13530395677282, 
         "info":"",
-        "img":""
+        "img":"static/img/sangoku.jpg"
     },{
         "ID":3,
         "name":"鷹栖海水浴場",
         "lat":36.13459177974316,
         "lng":136.07099072415022,
         "info":"",
-        "img":""
+        "img":"satic/img/takasukai.jpg"
     },{
         "ID":4,
         "name":"WAKASAWADA BEACH",
         "lat":36.13459177974316,
         "lng":136.07099072415022,
         "info":"",
-        "img":""
+        "img":"static/img/wakasawada.jpg"
     }
 ]
