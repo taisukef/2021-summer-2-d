@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width">
+        <title>詳細</title>
+        <link rel="stylesheet" href="./css/detail.css">
+
+        <script type="module">
+            import{fetchJSON}from "https://js.sabae.cc/fetchJSON.js";
+            import { enc } from "https://js.sabae.cc/enc.js";
+
+            function initMap(la, ln){
+                var mapPosition = {lat: la, lng: ln}
+                var mapArea = document.getElementById('maps');
+                var mapOptions = {
+                center: mapPosition,
+                zoom: 16,
+                };
+                var map = new google.maps.Map(mapArea, mapOptions);
+            }
+            
+
+            window.onload=async()=>{
+                const load=async()=>{
+                    var Params = new URLSearchParams(window.location.search);
+                    var which = Params.get('name')
+
+                    if (which == "beach"){
+                        console.log("beach selected");
+                    }else if (which == "rever"){
+                        console.log("rever selected");
+                    }
+                
+                    const data=await fetchJSON("/api/get-allID",which);
+                    container.innerHTML="";
+                    console.log(data)
+                    for(const d of data){
+                        const div=document.createElement("div");
+                        div.className="beaches";
+                        div.innerHTML=`<span class=ID>${(d.ID)}</span> by <span class=name>${(d.name)}</span>
+                            <img src=${(d.img)} width="30%">`
+                 //  div.innerHTML=d.ID;
+                        container.appendChild(div);
+                        }
+                }
+                load();
+            }
+            
+
+
+        </script>
+
+
+    </head>
+    <body>
+        <div id=container></div>    
+
+        <a href="board.html"><h1>掲示板</h1></a>
+    </body>
+    
+</html>
