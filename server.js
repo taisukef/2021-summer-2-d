@@ -2,6 +2,7 @@ import {Server} from "https://js.sabae.cc/Server.js";
 import {jsonfs} from "https://js.sabae.cc/jsonfs.js";
 import {CSV} from "https://js.sabae.cc/CSV.js";
 import {Day} from "https://code4fukui.github.io/day-es/Day.js";
+import {get_wlevel} from "./get_wlevel.js";
 
 //import {get_weather} from "./get_weather.js";
 
@@ -15,7 +16,7 @@ let board=jsonfs.read(boardfn)||[];
 
 class MyServer extends Server{
     async api(path,req){
-               if (path == "/api/get"){
+               if (path == "/api/get") {
             //海水浴場のデータを取得する
             //call:("/api/get",{type,ID}),return:{name,lat,lng,info,img}
             console.log("call get");
@@ -75,14 +76,14 @@ class MyServer extends Server{
             }
             console.log(data);
             return data;
-        } else if (path == "/api/csv"){
-            console.log("call csv");
-            const senserfn="data/sensors.csv";
-            let datafn="data/"+new Day().toString()+".csv";
-            console.log(datafn);
-            const senser=CSV.toJSON(await CSV.fetch(senserfn)).reverse();
-            const data=CSV.toJSON(await CSV.fetch(datafn)).reverse();
-            console.log(senser);
+        } else if (path == "/api/wlevel"){
+            console.log("call wlevel");
+            let item=[];
+            for(const d of river){
+                if(!item.includes(d.river)) item.push(d.river);
+            }
+            console.log("item :",item);
+            const data=await get_wlevel(item);
             console.log(data);
             return data;
         }
