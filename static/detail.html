@@ -6,60 +6,70 @@
         <title>詳細</title>
         <link rel="stylesheet" href="./css/detail.css">
 
-        <script type="module">
-            import{fetchJSON}from "https://js.sabae.cc/fetchJSON.js";
-            import { enc } from "https://js.sabae.cc/enc.js";
-
-            function initMap(la, ln){
-                var mapPosition = {lat: la, lng: ln}
-                var mapArea = document.getElementById('maps');
-                var mapOptions = {
-                center: mapPosition,
-                zoom: 16,
-                };
-                var map = new google.maps.Map(mapArea, mapOptions);
-            }
-            
-
-            window.onload=async()=>{
-                const load=async()=>{
-                    
-                    let Params = new URLSearchParams(window.location.search);
-                    let which = Params.get('name')
-                    let ID=Params.get('ID');
-                    if(ID==null) ID=1;
-
-                    let item={"type":which,"ID":ID};
-                    if (which == "beach"){
-                        console.log("beach selected");
-                    }else if (which == "rever"){
-                        console.log("rever selected");
-                    }
-                
-                    const d=await fetchJSON("/api/get",item);
-                    container.innerHTML="";
-                    console.log(d)
-                    const div=document.createElement("div");
-                    div.className="beaches";
-                    div.innerHTML=`<span class=ID>${(d.ID)}</span> by <span class=name>${(d.name)}</span>
-                        <img src=${(d.img)} width="30%">`
-                 //  div.innerHTML=d.ID;
-                    container.appendChild(div);
-                    }
-                    load();
-            }
-            
-            
-
-
-        </script>
-
 
     </head>
     <body>
         <div id=container></div>    
-
+        
         <a href="board.html"><h1>掲示板</h1></a>
+
+        <div id="map"></div>
+
     </body>
-    
+    <script type="module">
+        import{fetchJSON}from "https://js.sabae.cc/fetchJSON.js";
+        import { enc } from "https://js.sabae.cc/enc.js";      
+        
+        let la;
+        let ln;
+
+        window.onload=async()=>{
+            const load=async()=>{
+                
+                let Params = new URLSearchParams(window.location.search);
+                let which = Params.get('name')
+                let ID=Params.get('ID');
+                if(ID==null) ID=1;
+
+                let item={"type":"beach","ID":1};
+                if (which == "beach"){
+                    console.log("beach selected");
+                }else if (which == "rever"){
+                    console.log("rever selected");
+                }
+            
+                const d=await fetchJSON("/api/get",item);
+                container.innerHTML="";
+                console.log(d)
+                const div=document.createElement("div");
+                div.className="beaches";
+                div.innerHTML=`<span class=ID>${(d.ID)}</span> by <span class=name>${(d.name)}</span>
+                    <img src=${(d.img)} width="30%"> <p>${(d.info)}</p> `
+
+                container.appendChild(div);
+                
+                //以下地図
+                const script = document.createElement('script');
+                script.src = 'https://maps.googleapis.com/maps/api/js?key=AIzaSyAcMRVInnrt2J0VysiO3gUOD7ksQv89pX4&callback=initMap';
+                script.async = true;
+                
+                //Attach your callback function to the `window` object
+                window.initMap = function () {
+                // JS API is loaded and available
+                    console.log("map");
+                    mapobj = new google.maps.Map(document.getElementById('map'), {
+                        center: { lat: d.lat, lng: d.lng },
+                        zoom: 15
+                    });
+                };
+                
+                document.head.append(script)
+                }
+                load();
+        }
+        
+        
+
+
+    </script>
 </html>
