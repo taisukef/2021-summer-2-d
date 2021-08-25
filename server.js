@@ -17,8 +17,10 @@ class MyServer extends Server{
     async api(path,req){
                if (path == "/api/get"){
             //海水浴場のデータを取得する
-            //call("/api/get-b",{type,ID}),return:{name,lat,lng,info,img}
+            //call:("/api/get",{type,ID}),return:{name,lat,lng,info,img}
             console.log("call get");
+            console.log(req);
+            console.log(req.type);
             let json=[];
             if(req.type=="b" || req.type=="beach"){
                 json=beach;
@@ -31,7 +33,7 @@ class MyServer extends Server{
                 //console.log(d);
                 //console.log("ID :",d.ID);
                 //console.log(d.ID==reqID);
-                if(d.ID==req){
+                if(d.ID==req.ID){
                     //delete d.ID;
                     return d;
                 }

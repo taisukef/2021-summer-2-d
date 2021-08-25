@@ -23,16 +23,17 @@
 
             window.onload=async()=>{
                 const load=async()=>{
+                    
                     var Params = new URLSearchParams(window.location.search);
                     var which = Params.get('name')
-
+                    let item={"type":which,"ID":1};
                     if (which == "beach"){
                         console.log("beach selected");
                     }else if (which == "rever"){
                         console.log("rever selected");
                     }
                 
-                    const d=await fetchJSON("/api/get",{"type":"beach","ID":1});
+                    const d=await fetchJSON("/api/get",item);
                     container.innerHTML="";
                     console.log(d)
                     const div=document.createElement("div");
@@ -40,11 +41,11 @@
                     div.innerHTML=`<span class=ID>${(d.ID)}</span> by <span class=name>${(d.name)}</span>
                         <img src=${(d.img)} width="30%">`
                  //  div.innerHTML=d.ID;
-                        container.appendChild(div);
-                        }
-                }
-                load();
+                    container.appendChild(div);
+                    }
+                    load();
             }
+            
             
 
 
