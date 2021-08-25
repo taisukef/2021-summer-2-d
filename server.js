@@ -1,5 +1,7 @@
 import {Server} from "https://js.sabae.cc/Server.js";
 import {jsonfs} from "https://js.sabae.cc/jsonfs.js";
+import {CSV} from "https://js.sabae.cc/CSV.js";
+import {Day} from "https://code4fukui.github.io/day-es/Day.js";
 
 //import {get_weather} from "./get_weather.js";
 
@@ -12,8 +14,8 @@ let river=jsonfs.read(riverfn)||[];
 let board=jsonfs.read(boardfn)||[];
 
 class MyServer extends Server{
-    api(path,req){
-        if(path == "/api/get-b"){
+    async api(path,req){
+               if (path == "/api/get-b"){
             //海水浴場のデータを取得する
             //call("/api/get-b",ID),return:{name,lat,lng,info,img}
             console.log("call get-b");
@@ -27,7 +29,7 @@ class MyServer extends Server{
                 }
             }
             return "warning";
-        }else if(path == "/api/get-r"){
+        } else if (path == "/api/get-r"){
             //河川(キャンプ場)のデータを取得する
             //call("/api/get-r",ID),return:{name,river,lat,lng,info,img}
             console.log("call get-r");
@@ -53,7 +55,7 @@ class MyServer extends Server{
             //call:("/api/blist"),return:[data{未定}, ...]
 
             return board;
-        } else if (path=="/api/get-allID"){
+        } else if (path == "/api/get-allID"){
             //
             //call:("/api/get-allID",mode),return:[{ID,name}, ...]
             //mode:"b" or "beach",return:beach[{ID,name,img}, ...]
@@ -64,9 +66,9 @@ class MyServer extends Server{
                     //console.log(d);
                     //console.log("ID :",d.ID);
                     //console.log(d.ID==reqID);
-                    delete d.lat;
-                    delete d.lng;
-                    delete d.info;
+                    //delete d.lat;
+                    //delete d.lng;
+                    //delete d.info;
                     data.push(d);
                 }
                 console.log(data);
@@ -84,6 +86,17 @@ class MyServer extends Server{
             }else{
                 data="warning"
             }
+            return data;
+        } else if (path == "/api/csv"){
+            console.log("call csv");
+            const senser_url="https://github.com/code4fukui/waterlevel_fukui/blob/main/sensors.csv";
+            const data_url="https://github.com/code4fukui/waterlevel_fukui/blob/main/data/";
+            let csv_url=new Day().toString()+".csv";
+            console.log(data_url+csv_url);
+            const senser=CSV.toJSON(await CSV.fetch(senser_url)).reverse();
+            const data=CSV.toJSON(await CSV.fetch(data_url+csv_url)).reverse();
+            console.log(senser);
+            console.log(data);
             return data;
         }
     }
