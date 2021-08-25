@@ -3,12 +3,23 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width">
-        <title>海水浴場４</title>
-        <link rel="stylesheet" href="./css/Sea.css">
+        <title>詳細</title>
+        <link rel="stylesheet" href="./css/detail.css">
 
         <script type="module">
             import{fetchJSON}from "https://js.sabae.cc/fetchJSON.js";
             import { enc } from "https://js.sabae.cc/enc.js";
+
+            function initMap(la, ln){
+                var mapPosition = {lat: la, lng: ln}
+                var mapArea = document.getElementById('maps');
+                var mapOptions = {
+                center: mapPosition,
+                zoom: 16,
+                };
+                var map = new google.maps.Map(mapArea, mapOptions);
+            }
+            
 
             window.onload=async()=>{
                 const load=async()=>{
@@ -24,20 +35,14 @@
                     const data=await fetchJSON("/api/get-allID",which);
                     container.innerHTML="";
                     console.log(data)
-                    if(data!="warning"){
-                        for(const d of data){
-                            const div=document.createElement("div");
-                            div.className="beaches";
-                            div.innerHTML=`<h1><span class=name>${(d.name)}</span></h1>
-                                <img src=${(d.img)} width="30%"><br> <span class=info>${d.info}</span>`
-                            container.appendChild(div);
-                            }
-                    }else{
+                    for(const d of data){
                         const div=document.createElement("div");
-                        div.className="warning";
-                        div.innerHTML=`warning<br>data is not found.`
+                        div.className="beaches";
+                        div.innerHTML=`<span class=ID>${(d.ID)}</span> by <span class=name>${(d.name)}</span>
+                            <img src=${(d.img)} width="30%">`
+                 //  div.innerHTML=d.ID;
                         container.appendChild(div);
-                    }
+                        }
                 }
                 load();
             }
