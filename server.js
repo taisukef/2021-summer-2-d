@@ -61,31 +61,24 @@ class MyServer extends Server{
             //mode:"b" or "beach",return:beach[{ID,name,img}, ...]
             //mode:"r" or "river",return:river[{ID,name,img}, ...]
             let data=[];
+            let json=[];
             if(req=="b" || req=="beach"){
-                for(const d of beach){
-                    //console.log(d);
-                    //console.log("ID :",d.ID);
-                    //console.log(d.ID==reqID);
-                    //delete d.lat;
-                    //delete d.lng;
-                    //delete d.info;
-                    data.push(d);
-                }
-                console.log(data);
+                json=beach;
             }else if(req=="r" || req=="river"){
-                for(const d of river){
-                    //console.log(d);
-                    //console.log("ID :",d.ID);
-                    //console.log(d.ID==reqID);
-                    delete d.lat;
-                    delete d.lng;
-                    delete d.info;
-                    data.push(d);
-                }
-                console.log(data);
+                json=river;
             }else{
-                data="warning"
+                return "warning"
             }
+            for(const d of json){
+                //console.log(d);
+                //console.log("ID :",d.ID);
+                //console.log(d.ID==reqID);
+                //delete d.lat;
+                //delete d.lng;
+                //delete d.info;
+                data.push(d);
+            }
+            console.log(data);
             return data;
         } else if (path == "/api/csv"){
             console.log("call csv");
