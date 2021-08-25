@@ -6,17 +6,15 @@
         <script>
             
             function getId(item){
-                var attr = item.getAttribute("id");
-                console.log(attr);
-                
-                alert(attr)
+                var attr = item.getAttribute("id")
+                window.location.href="http://localhost:8889/SeaSpot.html?name=" + encodeURIComponent(attr)
             }
             /*$("#sea").click(function(){
                 alert("clicked")
                 window.location.href="http://localhost:8889/SeaSpot.html?name=" + encodeURIComponent('sea')
-            });
+            });*/
 
-            $("#river").click(function(){
+            /*$("#river").click(function(){
                 location.href="SeaSpot.html?name=" + encodeURIComponent('river')
             });*/
 
@@ -33,7 +31,7 @@
                 <main>
                     <div id="top-btn">
                             <button id="sea" onclick="getId(this)"><a>海で遊ぶ</a></button>
-                            <button id="river"><a>川で遊ぶ</a></button>
+                            <button id="river" onclick="getId(this)"><a>川で遊ぶ</a></button>
                     </div>
                 </main>
             </div>
