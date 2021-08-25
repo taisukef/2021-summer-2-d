@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <script type="text/javascript" src="script/fetchJSON.js"></script>
+        <script type="text/javascript" src="script/board.js"></script>
     </head>
     <body>
         <main>
@@ -10,12 +12,12 @@
             <div class=writebox>
                 名前：<input type=text id=inp_name><br>コメント<br>
                 <textarea id=inp_body></textarea><br>
-                <button type="submit" id=btn_write>書き込む</button>
+                <button onclick="add_board(0)">書き込む</button>
             </div>
         </main>
 
         <script type=module>
-        import { fetchJSON } from "https://js.sabae.cc/fetchJSON.js";
+        //import { fetchJSON } from "https://js.sabae.cc/fetchJSON.js";
         const enc = (s) => {
             s = s.replace(/&/g, "&amp;");
             s = s.replace(/</g, "&lt;");
@@ -27,48 +29,19 @@
         };
 
         window.onload = async () => {
-            const data = await fetchJSON("api/blist");
+            const num=0;
+            const api_url="api/list?"+num.toString();
+            console.log(api_url);
+            const data=await fetchJSON(api_url);
             for (const d of data) {
                 const div = document.createElement("div");
                 div.className = "bbsitem";
-                div.innerHTML = `<span class=date>${enc(d.date)}</span> by <span class=name>${enc(d.name)}</span>
-                <div class=body>${enc(d.body)}</div>`
+                div.innerHTML = `<span class=date>${enc(d.date)}</span> by <span class=name>${enc(d.name)}</span><div class=body>${enc(d.body)}</div>`
                 container.appendChild(div);
             }
-
-            btn_write.onclick = async () => {
-                const item = {
-                    name: inp_name.value,
-                    body: inp_body.value,
-                    date: new Date().toString()
-                };
-                if (await fetchJSON("api/badd", item) == "ok") {
-                    window.location.reload();
-                }
-            }
         };
-        (function ($) {//メニュー         
-            const $nav = $('#header');
-            const $btn = $('.menu');
-            const $mask = $('#mask');
-            const open = 'open';
+        
 
-            $btn.on('click', function () {
-                if (!$nav.hasClass(open)) {
-                    $nav.addClass(open);
-                    $btn.addClass(open); 
-                } else {
-                    $nav.removeClass(open);
-                    $btn.removeClass(open); 
-                }
-            });
-
-            $mask.on('click', function () {
-                $nav.removeClass(open);
-                $btn.removeClass(open); 
-            });
-
-        })(jQuery);
         </script>
 
         <a href="SeaSpot.html">戻る</a>
