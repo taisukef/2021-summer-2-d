@@ -41,8 +41,23 @@
                 }
                 load();
             }
-            
+  
+//ボタンが押されたら、押されたボタンのIDを返す
+   document.addEventListener('DOMContentLoaded',function(){
+    var btns = document.querySelectorAll('.btn-id');
+    for(var i = 0; i < btns.length; i++){
+        btns[i].addEventListener('click',function(){
+            alert('ID:'+this.id+'が選ばれました');
+            console.log(this.id);
 
+//詳細ページのID乗っけて飛ぶ
+            var attr =this.id;
+            //あってる？
+                window.location.href="detail.html?type=beach:ID=" + encodeURIComponent(attr)
+        
+            },false);
+    }
+},false);
 
         </script>
 
@@ -50,6 +65,18 @@
     </head>
     <body>
         <div id=container></div>    
+
+        <!--ボタン作って、タイプとIDをdetail.htmlに返す-->
+        <main>
+            <div id="select-btn">
+                <!--名前は仮置き、おいおいサーバーから名前もらってくるように-->
+                    <button class="btn-id" id="1"><a>1:浜地海水浴場</a></button>
+                    <button class="btn-id" id="2"><a>2:三国ビーチ</a></button>
+                    <button class="btn-id" id="3"><a>3:高巣海水浴場</a></button>
+                    <button class="btn-id" id="4"><a>4:ワサダワダ</a></button>
+                   
+            </div>
+        </main>
 
         <a href="board.html"><h1>掲示板</h1></a>
     </body>
