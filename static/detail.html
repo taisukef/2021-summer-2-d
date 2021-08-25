@@ -24,9 +24,12 @@
             window.onload=async()=>{
                 const load=async()=>{
                     
-                    var Params = new URLSearchParams(window.location.search);
-                    var which = Params.get('name')
-                    let item={"type":which,"ID":1};
+                    let Params = new URLSearchParams(window.location.search);
+                    let which = Params.get('name')
+                    let ID=Params.get('ID');
+                    if(ID==null) ID=1;
+
+                    let item={"type":which,"ID":ID};
                     if (which == "beach"){
                         console.log("beach selected");
                     }else if (which == "rever"){
