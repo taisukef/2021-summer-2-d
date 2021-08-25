@@ -16,6 +16,8 @@ let board=jsonfs.read(boardfn)||[];
 
 class MyServer extends Server{
     async api(path,req){
+        console.log("path :",path);
+        console.log("req :",req);
                if (path == "/api/get") {
             //海水浴場のデータを取得する
             //call:("/api/get",{type,ID}),return:{name,lat,lng,info,img}
@@ -40,51 +42,60 @@ class MyServer extends Server{
                 }
             }
             
-        } else if (path == "/api/badd") {
+        } else if (path == "/api/add") {
             //掲示板に書き込む
             //call:("/api/badd",data{未定}),return:"ok"
+            console.log("call badd");
             board.push(req);
             jsonfs.write(boardfn,board);
             return "ok";
+        } else if (path == "/api/list") {
+            console.log("call list")
+            let data=[];
+            //console.log(req);
+            for(const d of board){
+                //console.log(d);
+                if(d.ID==req){
+                    //delete d.ID;
+                    data.push(d);
+                }
+            }
+            return data;
         } else if (path == "/api/blist") {
             //掲示板の内容を返却
-            //call:("/api/blist"),return:[data{未定}, ...]
-
-            return board;
+            //call:("/api/blist",boardID),return:[data{未定}, ...]
+            console.log("call blist")
+            let data=[];
+            //console.log(req);
+            for(const d of board){
+                //console.log(d);
+                if(d.ID==req){
+                    //delete d.ID;
+                    data.push(d);
+                }
+            }
+            return data;
         } else if (path == "/api/get-allID"){
             //
             //call:("/api/get-allID",mode),return:[{ID,name}, ...]
             //mode:"b" or "beach",return:beach[{ID,name,img}, ...]
             //mode:"r" or "river",return:river[{ID,name,img}, ...]
-            let data=[];
-            let json=[];
             if(req=="b" || req=="beach"){
-                json=beach;
+                return beach;
             }else if(req=="r" || req=="river"){
-                json=river;
+                return river;
             }else{
                 return "warning"
             }
-            for(const d of json){
-                //console.log(d);
-                //console.log("ID :",d.ID);
-                //console.log(d.ID==reqID);
-                //delete d.lat;
-                //delete d.lng;
-                //delete d.info;
-                data.push(d);
-            }
-            console.log(data);
-            return data;
         } else if (path == "/api/wlevel"){
             console.log("call wlevel");
             let item=[];
             for(const d of river){
                 if(!item.includes(d.river)) item.push(d.river);
             }
-            console.log("item :",item);
+            //console.log("item :",item);
             const data=await get_wlevel(item);
-            console.log(data);
+            //console.log(data);
             return data;
         }
     }
