@@ -51,16 +51,7 @@ class MyServer extends Server{
             return "ok";
         } else if (path == "/api/list") {
             console.log("call list")
-            let data=[];
-            //console.log(req);
-            for(const d of board){
-                //console.log(d);
-                if(d.ID==req){
-                    //delete d.ID;
-                    data.push(d);
-                }
-            }
-            return data;
+            return board;
         } else if (path == "/api/blist") {
             //掲示板の内容を返却
             //call:("/api/blist",boardID),return:[data{未定}, ...]
