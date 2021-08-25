@@ -15,11 +15,19 @@ let board=jsonfs.read(boardfn)||[];
 
 class MyServer extends Server{
     async api(path,req){
-               if (path == "/api/get-b"){
+               if (path == "/api/get"){
             //海水浴場のデータを取得する
-            //call("/api/get-b",ID),return:{name,lat,lng,info,img}
-            console.log("call get-b");
-            for(const d of beach){
+            //call("/api/get-b",{type,ID}),return:{name,lat,lng,info,img}
+            console.log("call get");
+            let json=[];
+            if(req.type=="b" || req.type=="beach"){
+                json=beach;
+            }else if(req.type=="r" || req.type=="river"){
+                json=river;
+            }else{
+                return "warning";
+            }
+            for(const d of json){
                 //console.log(d);
                 //console.log("ID :",d.ID);
                 //console.log(d.ID==reqID);
@@ -28,22 +36,7 @@ class MyServer extends Server{
                     return d;
                 }
             }
-            return "warning";
-        } else if (path == "/api/get-r"){
-            //河川(キャンプ場)のデータを取得する
-            //call("/api/get-r",ID),return:{name,river,lat,lng,info,img}
-            console.log("call get-r");
-            console.log(river);
-            for(const d of river){
-                //console.log(d);
-                //console.log("ID :",d.ID);
-                //console.log(d.ID==reqID);
-                if(d.ID==req){
-                    delete d.ID;
-                    return d;
-                }
-            }
-            return "warning";
+            
         } else if (path == "/api/badd") {
             //掲示板に書き込む
             //call:("/api/badd",data{未定}),return:"ok"
@@ -82,12 +75,11 @@ class MyServer extends Server{
             return data;
         } else if (path == "/api/csv"){
             console.log("call csv");
-            const senser_url="https://github.com/code4fukui/waterlevel_fukui/blob/main/sensors.csv";
-            const data_url="https://github.com/code4fukui/waterlevel_fukui/blob/main/data/";
-            let csv_url=new Day().toString()+".csv";
-            console.log(data_url+csv_url);
-            const senser=CSV.toJSON(await CSV.fetch(senser_url)).reverse();
-            const data=CSV.toJSON(await CSV.fetch(data_url+csv_url)).reverse();
+            const senserfn="data/sensors.csv";
+            let datafn="data/"+new Day().toString()+".csv";
+            console.log(datafn);
+            const senser=CSV.toJSON(await CSV.fetch(senserfn)).reverse();
+            const data=CSV.toJSON(await CSV.fetch(datafn)).reverse();
             console.log(senser);
             console.log(data);
             return data;
