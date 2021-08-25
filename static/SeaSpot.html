@@ -14,15 +14,14 @@
                 const load=async()=>{
                     var Params = new URLSearchParams(window.location.search);
                     var which = Params.get('name')
-                    
-                    if (which == "sea"){
-                        console.log("sea selected");
+
+                    if (which == "beach"){
+                        console.log("beach selected");
                     }else if (which == "rever"){
                         console.log("rever selected");
                     }
                 
-                    
-                    const data=await fetchJSON("/api/get-allID","b");
+                    const data=await fetchJSON("/api/get-allID",which);
                     container.innerHTML="";
                     console.log(data)
                     for(const d of data){
