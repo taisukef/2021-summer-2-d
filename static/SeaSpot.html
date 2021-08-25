@@ -24,14 +24,21 @@
                     const data=await fetchJSON("/api/get-allID",which);
                     container.innerHTML="";
                     console.log(data)
-                    for(const d of data){
+                    if(data!="warning"){
+                        for(const d of data){
+                            const div=document.createElement("div");
+                            div.className="beaches";
+                            div.innerHTML=`<span class=ID>${(d.ID)}</span> by <span class=name>${(d.name)}</span>
+                                <img src=${(d.img)} width="30%">`
+                    //  div.innerHTML=d.ID;
+                            container.appendChild(div);
+                            }
+                    }else{
                         const div=document.createElement("div");
                         div.className="beaches";
-                        div.innerHTML=`<span class=ID>${(d.ID)}</span> by <span class=name>${(d.name)}</span>
-                            <img src=${(d.img)} width="30%">`
-                 //  div.innerHTML=d.ID;
+                        div.innerHTML=`warning<br>data is not found.`
                         container.appendChild(div);
-                        }
+                    }
                 }
                 load();
             }
