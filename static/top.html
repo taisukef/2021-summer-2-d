@@ -1,7 +1,27 @@
 <!DOCTYPE html>
 <html lang="jp">
     <head>
-        <link href=".css/top.css" rel="stylesheet">
+        <link href="./css/top.css" rel="stylesheet">
+
+        <script>
+            
+            function getId(item){
+                var attr = item.getAttribute("id");
+                console.log(attr);
+                
+                alert(attr)
+            }
+            /*$("#sea").click(function(){
+                alert("clicked")
+                window.location.href="http://localhost:8889/SeaSpot.html?name=" + encodeURIComponent('sea')
+            });
+
+            $("#river").click(function(){
+                location.href="SeaSpot.html?name=" + encodeURIComponent('river')
+            });*/
+
+        </script>
+
     </head> 
     <body>
         <div class="video-top">
@@ -12,8 +32,8 @@
                 </header>
                 <main>
                     <div id="top-btn">
-                        <button><a href="SeaSpot.html">海で遊ぶ</a></button>
-                        <button><a href="SeaSpot.html">川で遊ぶ</a></button>
+                            <button id="sea" onclick="getId(this)"><a>海で遊ぶ</a></button>
+                            <button id="river"><a>川で遊ぶ</a></button>
                     </div>
                 </main>
             </div>
