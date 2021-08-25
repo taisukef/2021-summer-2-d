@@ -27,11 +27,11 @@
             const load=async()=>{
                 
                 let Params = new URLSearchParams(window.location.search);
-                let which = Params.get('name')
+                let which = Params.get('type')
                 let ID=Params.get('ID');
                 if(ID==null) ID=1;
 
-                let item={"type":"beach","ID":1};
+                let item={"type":which,"ID":ID};
                 if (which == "beach"){
                     console.log("beach selected");
                 }else if (which == "rever"){
