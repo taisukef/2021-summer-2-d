@@ -44,12 +44,9 @@ img {
     padding: 20px;
 }
 
-.btn-id {
-    margin: 80px 0;
-    opacity: 0;
-}
 
 .showup {
+    margin:  80px 0;
     animation-name: showup;
     animation-duration: 7s;
     animation-fill-mode: forwards;
