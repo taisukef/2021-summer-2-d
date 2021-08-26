@@ -34,7 +34,7 @@ async function load_board(item){
     for (const d of data) {
         const div = document.createElement("div");
         div.className = "bbsitem";
-        div.innerHTML = `<span class=date>${enc(d.date)}</span> by <span class=name>${enc(d.name)}</span><div class=body>${enc(d.body)}</div>`
+        div.innerHTML = `<span class=date>${enc(d.date)}</span><br><span class=name>name : ${enc(d.name)}</span><div class=body>comment : ${enc(d.body)}</div>`
         board.appendChild(div);
     }
 }
