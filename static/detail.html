@@ -58,11 +58,10 @@
         window.onload=async()=>{
             console.log("reload");
             let Params = new URLSearchParams(window.location.search);
-            console.log(Params)
             
-            let which = Params.get('type[0]');
-            console.log(which)
-            let ID=Params.get('type[1]');
+            let which = Params.get('type');
+            let ID=Params.get('ID');
+
             if(ID==null) ID=1;
 
             console.log(ID);

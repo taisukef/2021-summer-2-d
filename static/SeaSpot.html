@@ -59,10 +59,11 @@
             selected.push(this.id);
 //詳細ページのID乗っけて飛ぶ
             console.log(selected)
+            //[river, 1]
             var attr =this.id;
             //あってる？
             
-                window.location.href="detail.html?type= " + selected;
+                window.location.href="detail.html?type=" + selected[0] + "&ID=" +selected[1];
         
             },false);
     }
