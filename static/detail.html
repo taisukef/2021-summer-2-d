@@ -9,11 +9,6 @@
         <script type="text/javascript" src="script/board.js"></script>
         
         <script type=module>
-            const Params = new URLSearchParams(window.location.search);
-            //const which = Params.get('name')
-            const ID=Params.get('ID');
-            console.log(ID);
-            //import { fetchJSON } from "https://js.sabae.cc/fetchJSON.js";
             const enc = (s) => {
                 s = s.replace(/&/g, "&amp;");
                 s = s.replace(/</g, "&lt;");
@@ -43,7 +38,7 @@
         <div id=container></div>    
         
         <h1>掲示板</h1>
-        <div id=boardr></div>
+        <div id=board></div>
             
             <div class=writebox>
                 名前：<input type=text id=inp_name><br>コメント<br>
@@ -61,12 +56,24 @@
         let ln;
 
         window.onload=async()=>{
+            console.log("reload");
+            let Params = new URLSearchParams(window.location.search);
+            let which = Params.get('type')
+            let ID=Params.get('ID');
+            if(ID==null) ID=1;
+
+            console.log(ID);
+            const api_url="api/list?"+ID.toString();
+            console.log(api_url);
+            const data=await fetchJSON(api_url);
+            for (const d of data) {
+                const div = document.createElement("div");
+                div.className = "bbsitem";
+                div.innerHTML = `<span class=date>${enc(d.date)}</span> by <span class=name>${enc(d.name)}</span><div class=body>${enc(d.body)}</div>`
+                board.appendChild(div);
+            }
+            
             const load=async()=>{
-                
-                let Params = new URLSearchParams(window.location.search);
-                let which = Params.get('type')
-                let ID=Params.get('ID');
-                if(ID==null) ID=1;
 
                 let item={"type":which,"ID":ID};
                 if (which == "beach"){
@@ -102,7 +109,9 @@
                 
                 document.head.append(script)
                 }
-                load();
+            
+            
+            load();
         }
     </script>
     
