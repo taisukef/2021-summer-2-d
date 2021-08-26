@@ -13,16 +13,21 @@
         <main>
         <div id=container></div>
             
+            <p>
             <div id=table></div>
+            </p>
+
+
+            <p>
             <h2>掲示板</h2>
             <div id=board></div>
             
                 <div class=writebox>
                     名前：<input type=text id=inp_name><br>コメント<br>
                     <textarea id=inp_body></textarea><br>
-                    <button onclick="add_board(0)">書き込む</button>
+                    <button id="write">書き込む</button>
                 </div>
-            
+            </p>
 
             <div id="map"></div>
         </main>
@@ -34,15 +39,15 @@
         let la;
         let ln;
 
+        let Params = new URLSearchParams(window.location.search);
+            
+        let which = Params.get('type');
+        let ID=Params.get('ID');
+        if(ID==null) ID=1;
+        const item={"type":which,"ID":ID};
+
         window.onload=async()=>{
             console.log("reload");
-            let Params = new URLSearchParams(window.location.search);
-            
-            let which = Params.get('type');
-            let ID=Params.get('ID');
-
-            if(ID==null) ID=1;
-            let item={"type":which,"ID":ID};
             const load=async()=>{
 
                 
@@ -80,12 +85,16 @@
                 document.head.append(script)
                 }
             
-            load_board(ID);
+            load_board(item);
             if(which=="river"){
                 const d=await fetchJSON("api/get",item);
                 criate_table(d.river);
             }
             load();
+        }
+
+        write.onclick=async()=>{
+            add_board(item);
         }
     </script>
     

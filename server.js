@@ -16,8 +16,8 @@ let board=jsonfs.read(boardfn)||[];
 
 class MyServer extends Server{
     async api(path,req){
-        console.log("path :",path);
-        console.log("req :",req);
+        //console.log("path :",path);
+        //console.log("req :",req);
                if (path == "/api/get") {
             //海水浴場のデータを取得する
             //call:("/api/get",{type,ID}),return:{name,lat,lng,info,img}
@@ -57,14 +57,15 @@ class MyServer extends Server{
             //call:("/api/blist",boardID),return:[data{未定}, ...]
             console.log("call blist")
             let data=[];
-            //console.log(req);
+            console.log(req);
             for(const d of board){
                 //console.log(d);
-                if(d.ID==req){
+                if(d.ID==req.ID && d.type==req.type){
                     //delete d.ID;
                     data.push(d);
                 }
             }
+            console.log(data);
             return data;
         } else if (path == "/api/get-allID"){
             //
