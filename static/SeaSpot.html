@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
-    <title>海水浴場４</title>
+    <title>選択画面</title>
     <link rel="stylesheet" href="./css/Sea.css">
     
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
@@ -36,9 +36,9 @@
                         const div = document.createElement("div");
                         div.className = "btn-items showup";
                         div.innerHTML = `<h1><span class=name>${(d.name)}</span></h1>
-                                <div class="content"><img src=${(d.img)}><div class="content-p"><p class=info>${d.info}</p>
+                                <div class="content"><p class=btn-id id=${d.ID}><img src=${(d.img)}></p><div class="content-p"><p class=info>${d.info}</p>
                                 <button class=btn-id id=${d.ID}>${(d.name)}</button></div></div>`
-                        //   container.appendChild(div);
+                        //画像にリンクをタグ付けしました
                         container.appendChild(div);
                     }
                 } else {
@@ -52,32 +52,27 @@
 
             //ボタンが押されたら、押されたボタンのIDを返す
             var btns = document.querySelectorAll('.btn-id');
-            console.log('btns')
-            console.log(btns)
             for (var i = 0; i < btns.length; i++) {
                 btns[i].addEventListener('click', function () {
                     
-                    console.log(this.id);
+                    //console.log(this.id);
                     selected.push(this.id);
                     //詳細ページのID乗っけて飛ぶ
                     console.log(selected)
                     //[river, 1]
                     
-                    //あってる？
                     window.location.href = "detail.html?type=" + selected[0] + "&ID=" + selected[1];
 
                 }, false);
             }
-
         }
-
     </script>
 </head>
 
 <body>
-    <!--ボタン作って、タイプとIDをdetail.htmlに返す-->
     <main>
         <div id=container></div>
+        
     </main>
 <script src="./css/jQuery.js"></script>
 </body>

@@ -3,13 +3,17 @@
 h1{
     font-size: 2rem;
     margin: 20px;
+    padding: 20px;
+    background-color: rgb(217, 242, 248);
 }
-
 
 img {
     width: 300px;
     height: 300px;
 }
+img:hover {
+    opacity: 0.5;
+ }
 
 #container {
     max-width: 960px;
@@ -39,10 +43,15 @@ img {
 .content-p button {
     margin: 0 auto;
     width: 200px;
-    background-color: aquamarine;
+    background-color: rgb(127, 225, 255);
     border-radius: 30px;
     padding: 20px;
+    cursor: pointer;
 }
+.content-p button:hover {
+    background-color: rgb(179, 255, 250);   /* ボタンの表面色をちょっと明るく */
+    border-color: rgb(40, 52, 56);       /* 枠線の色もちょっと明るく */
+ }
 .btn-items {
     opacity: 0;
 }
