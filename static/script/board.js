@@ -23,3 +23,17 @@ async function add_board(boardID){
         window.location.reload();
     }
 }
+
+async function load_board(ID){
+    console.log("reload");
+    console.log(ID);
+    const api_url="api/list?"+ID.toString();
+    console.log(api_url);
+    const data=await fetchJSON(api_url);
+    for (const d of data) {
+        const div = document.createElement("div");
+        div.className = "bbsitem";
+        div.innerHTML = `<span class=date>${enc(d.date)}</span> by <span class=name>${enc(d.name)}</span><div class=body>${enc(d.body)}</div>`
+        board.appendChild(div);
+    }
+}

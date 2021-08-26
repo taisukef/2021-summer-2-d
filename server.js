@@ -79,6 +79,8 @@ class MyServer extends Server{
                 return "warning"
             }
         } else if (path == "/api/wlevel"){
+            //
+            //call:(/api/wlevel),return:[{data}, ...]
             console.log("call wlevel");
             let item=[];
             for(const d of river){
@@ -87,6 +89,21 @@ class MyServer extends Server{
             //console.log("item :",item);
             const data=await get_wlevel(item);
             //console.log(data);
+            return data;
+        } else if (path == "/api/rwlevel"){
+            //
+            //call:("/api/rwlevel",river),return:[{data}, ...]
+            console.log("call rwlevel");
+            console.log(req);
+            const data=await get_wlevel(req);
+            for(const d in data){
+                 delete data[d].id;
+                 delete data[d].通報水位;
+                 delete data[d].警戒水位;
+                 delete data[d].特別警戒水位;
+                 delete data[d].危険水位;
+                 //delete data[d].geo3x3;
+            }
             return data;
         }
     }
