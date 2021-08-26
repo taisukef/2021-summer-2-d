@@ -20,7 +20,7 @@ main {
     align-items: center;
 }
 
-img {
+main.img {
     width: 700px;
     height: auto;
     margin: 50px auto;
