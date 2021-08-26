@@ -8,10 +8,16 @@
         <script type="text/javascript" src="script/fetchJSON.js"></script>
         <script type="text/javascript" src="script/board.js"></script>
         <script type="text/javascript" src="script/table.js"></script>
+        <style>
+            dialog{
+                z-index: +100;
+            }
+        </style>
     </head>
     <body>
         <main>
-        <div id=container></div>
+            <dialog><div id="dialog_area"></div></dialog>
+            <div id=container></div>
             
             <div id=table></div>
 
@@ -40,6 +46,7 @@
         import{fetchJSON}from "https://js.sabae.cc/fetchJSON.js";
         import { enc } from "https://js.sabae.cc/enc.js";      
         
+        
         let la;
         let ln;
 
@@ -52,6 +59,7 @@
 
         window.onload=async()=>{
             console.log("reload");
+            show_dialog(); 
             const load=async()=>{
 
                 
@@ -96,7 +104,8 @@
                 //criate_table(table_item.name);
                 water_level(table_item);
             }
-            load();
+            load();         
+            dialog.show();
         }
 
         write.onclick=async()=>{
@@ -104,5 +113,6 @@
         }
     </script>
     
+    <script type="text/javascript" src="script/dialog.js"></script>
     
 </html>
