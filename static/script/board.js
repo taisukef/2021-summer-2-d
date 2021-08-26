@@ -33,8 +33,8 @@ async function load_board(item){
     const data=await fetchJSON("api/blist",item);
     for (const d of data) {
         const div = document.createElement("div");
-        div.className = "bbsitem";
-        div.innerHTML = `<span class=date>${enc(d.date)}</span><br><span class=name>name : ${enc(d.name)}</span><div class=body>comment : ${enc(d.body)}</div>`
+        div.className = "bbsitem-board";
+        div.innerHTML = `<span class=date>${enc(d.date)}</span><br><div class="comment-content"><p class=name>name : ${enc(d.name)}</p><p class=comment>comment : ${enc(d.body)}</p></div>`
         board.appendChild(div);
     }
 }

@@ -13,23 +13,27 @@
         <main>
         <div id=container></div>
             
-            <p>
             <div id=table></div>
-            </p>
 
 
-            <p>
-            <h2>掲示板</h2>
-            <div id=board></div>
-            
-                <div class=writebox>
-                    名前：<input type=text id=inp_name><br>コメント<br>
-                    <textarea id=inp_body></textarea><br>
-                    <button id="write">書き込む</button>
+            <div class="content">
+                <div class="map">
+                    <h4 class="map-header">場所</h4>
+                <div id="map">
                 </div>
-            </p>
+                </div>
 
-            <div id="map"></div>
+                <div class="board">
+                    <h2>掲示板</h2>
+                    <div class=writebox>
+                        名前：<input type=text id=inp_name><br>コメント<br>
+                        <textarea id=inp_body></textarea><br>
+                        <button id="write">書き込む</button>
+                    </div>
+                    <div id=board></div>
+                </div>
+
+            </div>
         </main>
     </body>
     <script type="module">
@@ -62,8 +66,8 @@
                 console.log(d)
                 const div=document.createElement("div");
                 div.className="beaches";
-                div.innerHTML=`<p><h1><span class=ID>${(d.ID)}</span> <span class=name>${(d.name)}</span></h1></p>
-                    <p><img src=${(d.img)} width="30%"></p> <p>${(d.info)}</p> `
+                div.innerHTML=`<h1 class=name>${(d.name)}</h1>
+                <img src=${(d.img)}><div class="text"><p>${(d.info)}</p></div> `
 
                 container.appendChild(div);
                 

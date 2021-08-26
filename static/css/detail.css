@@ -1,12 +1,144 @@
 @charset "UTF-8";
 
 #map {
-    height: 300px;
-    width: 300px;
+    height: 400px;
+    width: 400px;
 }
 
 html, body {
     padding: 0;
     margin: 0;
     height: 100%;
+}
+
+main {
+    margin: 0 auto;
+    max-width: 960px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+img {
+    width: 700px;
+    height: auto;
+    margin: 50px auto;
+}
+
+h1 {
+    text-align: center;
+}
+img {
+    display: block;
+    text-align: center;
+}
+
+.text p {
+    width: 70%;
+    line-height: 3;
+    margin: 10px auto;
+}
+
+.text{
+    width: 80%;
+    margin:0 auto;
+    position: relative;
+    padding: 0.25em 1em;
+    border: solid 2px #ffcb8a;
+    border-radius: 3px 0 3px 0;
+}
+.text:before,.box18:after
+{
+    content: '';
+    position: absolute;
+    width:10px;
+    height: 10px;
+    border: solid 2px #ffcb8a;
+    border-radius: 50%;
+}
+.text:after {
+    top:-12px;
+    left:-12px;
+}
+.text:before {
+    bottom:-12px;
+    right:-12px;
+}
+
+#table {
+    width: 80%;
+}
+.bbsitem {
+    padding: 30px;
+    margin-top: 40px;
+}
+.river-title {
+    display: block;
+    margin: 10px auto;
+    text-align: center;
+}
+
+.river-sub-title {
+    display: block;
+    margin: 20px auto;
+    text-align: center;
+}
+table{
+    margin: 30px auto;
+}
+
+.bbsitem a {
+    display: block;
+    text-align: right;
+    margin: 30px auto;
+}
+
+.bbsitem{
+    position: relative;
+    background: #fff0cd;
+    box-shadow: 0px 0px 0px 5px #fff0cd;
+    border: dashed 2px white;
+    padding: 0.2em 0.5em;
+    color: #454545;
+}
+.bbsitem:after{
+    position: absolute;
+    content: '';
+    right: -7px;
+    top: -7px;
+    border-width: 0 15px 15px 0;
+    border-style: solid;
+    border-color: #ffdb88 #fff #ffdb88;
+    box-shadow: -1px 1px 1px rgba(0, 0, 0, 0.15);
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 40px;
+}
+.board {
+    padding: 40px;
+}
+
+#map {
+    margin: 30px 0;
+}
+
+.map-header {
+    font-size: 25px;
+}
+
+.comment-content {
+    border-top: 2px solid #333;
+}
+
+.comment-content p{
+    font-size: 15px;
+}
+
+.writebox {
+    margin-bottom: 20px;
 }
