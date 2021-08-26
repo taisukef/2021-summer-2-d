@@ -8,7 +8,7 @@ const dialog_mess=[
 ]
 let dialog=document.querySelector("dialog");
 
-let rand=Math.floor(Math.random()*(6));
+let rand=Math.floor(Math.random()*dialog_mess.length());
 
 function show_dialog(){
     const dialogs = document.getElementById('dialog_area');
