@@ -3,10 +3,10 @@ $(function(){
       const wHeight = $(window).height();
       const scrollAmount = $(window).scrollTop();
       
-      $('.btn-id').each(function(){
+      $('.btn-items').each(function(){
         const itemTarget = $(this).offset().top;
         
-        if (scrollAmount > itemTarget - wHeight - 20) {
+        if (scrollAmount > itemTarget - wHeight + 20) {
           $(this).addClass("showup");
         }
       });
