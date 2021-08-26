@@ -6,6 +6,9 @@
     <meta name="viewport" content="width=device-width">
     <title>海水浴場４</title>
     <link rel="stylesheet" href="./css/Sea.css">
+    
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
 
     <script type="module">
         import { fetchJSON } from "https://js.sabae.cc/fetchJSON.js";
@@ -31,12 +34,12 @@
                 if (data != "warning") {
                     for (const d of data) {
                         const div = document.createElement("div");
-                        div.className = "btn-id";
+                        div.className = "btn-id showup";
                         div.innerHTML = `<h1><span class=name>${(d.name)}</span></h1>
-                                <img src=${(d.img)} width="30%"><br> <span class=info>${d.info}</span>
-                                <br><button class=btn-id id=${d.ID}>${(d.name)}</button>`
+                                <div class="content"><img src=${(d.img)}><div class="content-p"><p class=info>${d.info}</p>
+                                <button class=btn-id id=${d.ID}>${(d.name)}</button></div></div>`
                         //   container.appendChild(div);
-                        document.body.appendChild(div);
+                        container.appendChild(div);
                     }
                 } else {
                     const div = document.createElement("div");
@@ -53,13 +56,13 @@
             console.log(btns)
             for (var i = 0; i < btns.length; i++) {
                 btns[i].addEventListener('click', function () {
-                    alert('ID:' + this.id + 'が選ばれました');
+                    
                     console.log(this.id);
                     selected.push(this.id);
                     //詳細ページのID乗っけて飛ぶ
                     console.log(selected)
                     //[river, 1]
-                    var attr = this.id;
+                    
                     //あってる？
                     window.location.href = "detail.html?type=" + selected[0] + "&ID=" + selected[1];
 
@@ -76,10 +79,7 @@
     <main>
         <div id=container></div>
     </main>
-
-    <a href="board.html">
-        <h1>掲示板</h1>
-    </a>
+<script src="./css/jQuery.js"></script>
 </body>
 
 </html>
