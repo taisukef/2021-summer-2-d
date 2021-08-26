@@ -35,18 +35,21 @@
         </script>
     </head>
     <body>
-        <div id=container></div>    
+        <main>
+        <div id=container></div>
         
-        <h1>掲示板</h1>
-        <div id=board></div>
+            <h1>掲示板</h1>
+            <div id=board></div>
+                
+                <div class=writebox>
+                    名前：<input type=text id=inp_name><br>コメント<br>
+                    <textarea id=inp_body></textarea><br>
+                    <button onclick="add_board(0)">書き込む</button>
+                </div>
             
-            <div class=writebox>
-                名前：<input type=text id=inp_name><br>コメント<br>
-                <textarea id=inp_body></textarea><br>
-                <button onclick="add_board(0)">書き込む</button>
-        </div>
-        <div id="map"></div>
 
+            <div id="map"></div>
+        </main>
     </body>
     <script type="module">
         import{fetchJSON}from "https://js.sabae.cc/fetchJSON.js";
@@ -89,7 +92,7 @@
                 console.log(d)
                 const div=document.createElement("div");
                 div.className="beaches";
-                div.innerHTML=`<span class=ID>${(d.ID)}</span> by <span class=name>${(d.name)}</span>
+                div.innerHTML=`<span class=ID>${(d.ID)}</span><span class=name>${(d.name)}</span>
                     <img src=${(d.img)} width="30%"> <p>${(d.info)}</p> `
 
                 container.appendChild(div);
