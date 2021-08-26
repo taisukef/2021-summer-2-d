@@ -88,7 +88,9 @@
             load_board(item);
             if(which=="river"){
                 const d=await fetchJSON("api/get",item);
-                criate_table(d.river);
+                const table_item={"name":d.river,"watch":d.watch};
+                //criate_table(table_item.name);
+                water_level(table_item);
             }
             load();
         }
