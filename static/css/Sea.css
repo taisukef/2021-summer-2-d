@@ -3,6 +3,8 @@
 h1{
     font-size: 2rem;
     margin: 20px;
+    padding: 20px;
+    background-color: rgb(217, 242, 248);
 }
 
 img {
