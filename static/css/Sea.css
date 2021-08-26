@@ -5,7 +5,6 @@ h1{
     margin: 20px;
 }
 
-
 img {
     width: 300px;
     height: 300px;
@@ -45,7 +44,12 @@ img:hover {
     background-color: rgb(127, 225, 255);
     border-radius: 30px;
     padding: 20px;
+    cursor: pointer;
 }
+.content-p button:hover {
+    background-color: rgb(179, 255, 250);   /* ボタンの表面色をちょっと明るく */
+    border-color: rgb(40, 52, 56);       /* 枠線の色もちょっと明るく */
+ }
 .btn-items {
     opacity: 0;
 }
