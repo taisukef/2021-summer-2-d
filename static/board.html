@@ -12,36 +12,19 @@
             <div class=writebox>
                 名前：<input type=text id=inp_name><br>コメント<br>
                 <textarea id=inp_body></textarea><br>
-                <button onclick="add_board(0)">書き込む</button>
+                <button id="write">書き込む</button>
             </div>
         </main>
 
         <script type=module>
-        //import { fetchJSON } from "https://js.sabae.cc/fetchJSON.js";
-        const enc = (s) => {
-            s = s.replace(/&/g, "&amp;");
-            s = s.replace(/</g, "&lt;");
-            s = s.replace(/>/g, "&gt;");
-            s = s.replace(/\n/g, "<br>");
-            s = s.replace(/"/g, "&quot");
-            s = s.replace(/'/g, "&#39");
-            return s;
-        };
-
+        const item={"type":"board","ID":0}
         window.onload = async () => {
-            const num=0;
-            const api_url="api/list?"+num.toString();
-            console.log(api_url);
-            const data=await fetchJSON(api_url);
-            for (const d of data) {
-                const div = document.createElement("div");
-                div.className = "bbsitem";
-                div.innerHTML = `<span class=date>${enc(d.date)}</span> by <span class=name>${enc(d.name)}</span><div class=body>${enc(d.body)}</div>`
-                container.appendChild(div);
-            }
+            load_board(item);
         };
         
-
+        write.onclick=async()=>{
+            add_board(item);
+        }
         </script>
 
         <a href="SeaSpot.html">戻る</a>
