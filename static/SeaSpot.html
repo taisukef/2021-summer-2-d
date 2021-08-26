@@ -10,15 +10,20 @@
             import{fetchJSON}from "https://js.sabae.cc/fetchJSON.js";
             import { enc } from "https://js.sabae.cc/enc.js";
 
+            var selected = []
             window.onload=async()=>{
                 const load=async()=>{
                     var Params = new URLSearchParams(window.location.search);
                     var which = Params.get('name')
 
                     if (which == "beach"){
-                        console.log("beach selected");
-                    }else if (which == "rever"){
-                        console.log("rever selected");
+                        document.getElementById("riverspot").style.display = "none";
+                        selected.push("beach")
+                        
+                    }else if (which == "river"){
+                        document.getElementById("seaspot").style.display = "none";
+                        selected.push("river")
+                        
                     }
                 
                     const data=await fetchJSON("/api/get-allID",which);
@@ -51,11 +56,13 @@
         btns[i].addEventListener('click',function(){
             alert('ID:'+this.id+'が選ばれました');
             console.log(this.id);
-
+            selected.push(this.id);
 //詳細ページのID乗っけて飛ぶ
+            console.log(selected)
             var attr =this.id;
             //あってる？
-                window.location.href="detail.html?type=beach:ID=" + encodeURIComponent(attr)
+            
+                window.location.href="detail.html?type= " + selected;
         
             },false);
     }
@@ -75,11 +82,19 @@
             
                 <div id=container></div>
                 <!--名前は仮置き、おいおいサーバーから名前もらってくるように-->
+                <div id="seaspot">
                     <button class="btn-id" id="1"><a>1:浜地海水浴場</a></button>
                     <button class="btn-id" id="2"><a>2:三国ビーチ</a></button>
                     <button class="btn-id" id="3"><a>3:高巣海水浴場</a></button>
                     <button class="btn-id" id="4"><a>4:ワサダワダ</a></button>
-                   
+                </div>
+                <div id="riverspot">
+                    <button class="btn-id" id="1"><a>1:a</a></button>
+                    <button class="btn-id" id="2"><a>2:b</a></button>
+                    <button class="btn-id" id="3"><a>3:c</a></button>
+                    <button class="btn-id" id="4"><a>4:d</a></button>
+                </div>
+
         </main>
 
         <a href="board.html"><h1>掲示板</h1></a>
