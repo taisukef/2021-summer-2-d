@@ -10,14 +10,6 @@
         <script type="text/javascript" src="script/fetchJSON.js"></script>
         <script type="text/javascript" src="script/board.js"></script>
         <script type="text/javascript" src="script/table.js"></script>
-        <style>
-            /*dialog{
-                z-index: +100;
-                width:50%;
-                max-width:450px;
-                height:500px;
-            }*/
-        </style>
     </head>
     <body>
         <main>
@@ -25,7 +17,6 @@
             <div id=container></div>
             
             <div id=table></div>
-
 
             <div class="content">
                 <div class="map">
@@ -60,22 +51,23 @@
             
         let which = Params.get('type');
         let ID=Params.get('ID');
-        if(ID==null) ID=1;
+        if(which==null && ID==null){
+            which="board";
+            ID=0;
+        } else if(ID==null) ID=1;
         const item={"type":which,"ID":ID};
 
         window.onload=async()=>{
             console.log("reload");
             show_dialog(); 
+            const d=await fetchJSON("/api/get",item);
             const load=async()=>{
-
-                
                 if (which == "beach"){
                     console.log("beach selected");
                 }else if (which == "rever"){
                     console.log("rever selected");
                 }
             
-                const d=await fetchJSON("/api/get",item);
                 container.innerHTML="";
                 console.log(d)
                 const div=document.createElement("div");
@@ -101,17 +93,22 @@
                 };
                 
                 document.head.append(script)
-                }
-            
-            load_board(item);
-            if(which=="river"){
-                const d=await fetchJSON("api/get",item);
-                const table_item={"name":d.river,"watch":d.watch};
-                //criate_table(table_item.name);
-                water_level(table_item);
             }
-            load();         
-            dialog.show();
+            load_board(item);
+            if(d != "warning"){
+                if(which=="river"){
+                    const table_item={"name":d.river,"watch":d.watch};
+                    //criate_table(table_item.name);
+                    water_level(table_item);
+                }
+                load();         
+                dialog.show();
+            }else{
+                const div = document.createElement("div");
+                div.className = "warning";
+                div.innerHTML = `warning<br>data is not found.`
+                container.appendChild(div);
+            }
         }
 
         write.onclick=async()=>{
