@@ -163,7 +163,7 @@ table{
     z-index: 10;
     width:50%;
     max-width:450px;
-    height:500px;
+    height:550px;
 }
 
 center {
@@ -173,7 +173,7 @@ center {
 }
 
 center button {
-    padding: 20px;
+    padding: 5px;
     margin: 20px;
     background-color: chartreuse;
 }
