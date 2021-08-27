@@ -6,6 +6,18 @@
     <meta name="viewport" content="width=device-width">
     <title>福井の水辺で遊ぼっさ！！- 選択画面</title>
     <link rel="stylesheet" href="./css/Sea.css">
+    <style>
+            #map {
+            height: 70%;
+            width:70%;
+        }
+        /* Optional: Makes the sample page fill the window. */
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+    </style>
     
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
@@ -25,7 +37,6 @@
 
                 } else if (which == "river") {
                     selected.push("river")
-
                 }
 
                 const data = await fetchJSON("/api/get-allID", which);
@@ -72,9 +83,88 @@
 <body>
     <main>
         <div id=container></div>
-        
     </main>
 <script src="./css/jQuery.js"></script>
+
+<div id="map"></div>
+<!--aaaaaaaaaaa　マップ　aaaaaaaaaa-->
+<script>
+    
+function initMap() {
+    // Create the map.
+    const map = new google.maps.Map(document.getElementById("map"), {
+      zoom: 10,
+      center: { lat: 36.24993, lng: 136.161467 },
+    //  mapTypeId: "terrain",
+    });
+    let infoWindow=new google.maps.InfoWindow({
+      content:"Click the map to get Lat/Lng!",
+      position: { lat: 36.24993, lng: 136.161467 },
+    });
+    //infoWindow.open(map);
+  
+  
+map.addListener("click",(e)=>{//クリックされたときの反応
+      infoWindow.close();
+    //  placeMarker(e.latLng,map);
+      placeCircle(e.latLng,map);
+    //  openWindow(e.latLng,map);
+    //  memorylatlng(e.latLng,map);
+    });
+    /*
+    for (const city in citymap) {
+      // Add the circle for this city to the map.
+      const cityCircle = new google.maps.Circle({//配列のサークルをおく
+        strokeColor: "#FF0000",
+        strokeOpacity: 0.8,
+        strokeWeight: 2,
+        fillColor: "#FF0000",
+        fillOpacity: 0.35,
+        map,
+        center: citymap[city].center,
+        radius: Math.sqrt(300) * 100,
+      });
+    }*/
+  }
+  function placeMarker(latLng,map){//マーカーを置く関数
+    new google.maps.Marker({
+      position:latLng,
+      map:map,
+    });
+    map.panTo(latLng);
+  }
+  function openWindow(latLng,map){//クリック地点の座標を表示する関数
+    infoWindow=new google.maps.InfoWindow({
+        position: latLng,
+      });
+      infoWindow.setContent(
+        JSON.stringify(latLng.toJSON(),null,2)
+      );
+      infoWindow.open(map);
+  }
+  //  for (const city in citymap) {
+      function placeCircle(latLng,map){//赤いサークルをおく関数
+      const cityCircle = new google.maps.Circle({
+        strokeColor: "#FF0000",
+        strokeOpacity: 0.8,
+        strokeWeight: 2,
+        fillColor: "#FF0000",
+        fillOpacity: 0.35,
+        map,
+        center: latLng,
+        radius: Math.sqrt(300) * 100,
+      });
+    }
+  //}
+  function memorylatlng(latLng,map){
+    
+    
+    console.log(citymap);
+  }  
+  </script> 
+  <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB-oeKW11Cy_HscyhPGfK3vwwd4rpWJB9M&callback=initMap"></script>
+  
+
 </body>
 
 </html>
