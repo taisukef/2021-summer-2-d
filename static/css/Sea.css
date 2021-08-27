@@ -75,3 +75,33 @@ img:hover {
 .showup {
     transform: translateX(400px);
 }
+
+#map {
+    width: 600px;
+    height: 600px;
+    margin: 0 auto;
+}
+
+.Sealist {
+    padding: 100px;
+}
+
+/*.showup-map {
+    margin:  80px 0;
+    animation-name: showup-map;
+    animation-duration: 7s;
+    animation-fill-mode: forwards;
+}
+@keyframes showup-map {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+        transform: translate(0);
+    }
+}
+
+.showup-map {
+    transform: translateX(400px);
+}*/
