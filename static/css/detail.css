@@ -29,9 +29,9 @@ main.img {
 h1 {
     text-align: center;
 }
-img {
+.detail-img {
     display: block;
-    text-align: center;
+    margin: 20px auto;
 }
 
 .text p {
@@ -141,4 +141,39 @@ table{
 
 .writebox {
     margin-bottom: 20px;
+}
+@keyframes my-fade-in {
+    from {
+      opacity: 0;
+      transform: translateY(-60px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+.dialog {  
+    /* .boxが「my-fade-in」で状態変化するように指定 */
+    animation-name:     my-fade-in;
+    animation-duration: 3s;
+  }
+
+  .dialog {
+    z-index: 10;
+    width:50%;
+    max-width:450px;
+    height:500px;
+}
+
+center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+center button {
+    padding: 20px;
+    margin: 20px;
+    background-color: chartreuse;
 }
