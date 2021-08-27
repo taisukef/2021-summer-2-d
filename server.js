@@ -1,7 +1,7 @@
 import {Server} from "https://js.sabae.cc/Server.js";
 import {jsonfs} from "https://js.sabae.cc/jsonfs.js";
-import {CSV} from "https://js.sabae.cc/CSV.js";
-import {Day} from "https://code4fukui.github.io/day-es/Day.js";
+//import {CSV} from "https://js.sabae.cc/CSV.js";
+//import {Day} from "https://code4fukui.github.io/day-es/Day.js";
 import {get_wlevel} from "./get_wlevel.js";
 
 //import {get_weather} from "./get_weather.js";
@@ -9,10 +9,12 @@ import {get_wlevel} from "./get_wlevel.js";
 const beachfn="data/beach.json";
 const riverfn="data/river.json";
 const boardfn="data/board.json";
+const accidfn="data/accident.json";
 
 let beach=jsonfs.read(beachfn)||[];
 let river=jsonfs.read(riverfn)||[];
 let board=jsonfs.read(boardfn)||[];
+let accid=jsonfs.read(accidfn)||[];
 
 class MyServer extends Server{
     async api(path,req){
@@ -106,6 +108,16 @@ class MyServer extends Server{
                  //delete data[d].geo3x3;
             }
             return data;
+        } else if (path == "/api/pull_pin"){
+            //call:("api/pull_pin"),return:[{lat,lng}, ...]
+            console.log("call pull_pin");
+            return accid;
+        } else if (path == "/api/push_pin"){
+            //call:("api/push_pin",{lat,lng}),return:ok
+            console.log("call push_pin");
+            accid.push(req);
+            jsonfs.write(accidfn,accid);
+            return "ok";
         }
     }
 }
