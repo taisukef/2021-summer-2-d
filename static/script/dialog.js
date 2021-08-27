@@ -10,7 +10,7 @@ const dialog_mess=[
 /* 9*/    '<img class="dialog-img" src="https://2.bp.blogspot.com/-BbCJiQ5HapA/VkxNlfQ6RuI/AAAAAAAA0xg/_yFteAETmW0/s400/kaminari_rakurai_tree.png" width="200px" height:auto><h2>雷</h2>雷は高いところに落ちる習性があるので木に落ちる可能性がある<br>ゴロゴロと聞こえたら急いで屋根のある建物に避難しよう<br>',
 /*10*/    '<img class="dialog-img" src="https://1.bp.blogspot.com/-wkOBdalXEQE/V8VFHtSr9pI/AAAAAAAA9Z8/ylNnNCBWo0sjzxhte4xlEUsZB8fWl6Q1wCLcB/s400/summer_water_jug.png" width="200px" height:auto><h2>水分補給はしっかり</h2>水を飲もう！<br>夏でも冬でも<br>',
 /*11*/    '<img class="dialog-img" src="https://3.bp.blogspot.com/-YtjftnKFO_c/Wk2upKz_LdI/AAAAAAABJaY/vJ2RnwdUeqE8RSH3r11u3W_Eneau9K_uACLcBGAs/s400/kosyudenwa_digital.png" width="200px" height:auto><h2>もしも事故が起きたら…</h2>海の事故は「118」<br>山の事故は「110」「119」<br>事故が起きたらすぐに予防<br>',
-/*12*/    '<img class="dialog-img" src="" width="200px" height:auto><h2></h2><br>',
+/*12*/    '<img class="dialog-img" src="https://1.bp.blogspot.com/-05aCDR0ZTzc/X1CLEtZkcwI/AAAAAAABa0w/bHCe2_YyVrMTYgBsvLxxmZ27JkkLHrZEACNcBGAsYHQ/s400/ocean_same_hire.png" width="200px" height:auto><h2>サメに出会ったら</h2>むやみに刺激せず逃げる<br>水しぶきを立てない<br>複数人でいるなら海中で大声を出す<br>鼻や目を攻撃する<br>難を逃れたら陸に上がり、速やかに通報する<br><a href="https://waval.net/11989/">WAVAL</a><br>',
 /*13*/    '<img class="dialog-img" src="" width="200px" height:auto><h2></h2><br>',
 /*14*/    '<img class="dialog-img" src="" width="200px" height:auto><h2></h2><br>',
 /*15*/    '<img class="dialog-img" src="" width="200px" height:auto><h2></h2><br>',
@@ -19,7 +19,7 @@ const dialog_mess=[
 
 let dialog=document.querySelector("dialog");
 
-const rand=Math.floor(Math.random()*11);
+const rand=Math.floor(Math.random()*12);
 
 function show_dialog(){
     const dialogs = document.getElementById('dialog_area');
