@@ -1,4 +1,4 @@
-"use strict";
+import { getNearest } from "https://code4fukui.github.io/waterlevel_fukui/getNearest.js";
 
 async function criate_table(name){
     const data=await fetchJSON("api/rwlevel",name);
@@ -42,9 +42,14 @@ async function criate_table(name){
     table.appendChild(div);
 }
 
-async function water_level(item){
+async function water_level(sensordata) {
+    const item = { name: sensordata.river, watch: sensordata.watch };
     //item:{name,watch}
-    const data=await fetchJSON("api/rwlevel",item.name);
+    //const data=await fetchJSON("api/rwlevel",item.name);
+
+    console.log(sensordata.lat, sensordata.lng);
+    const data = [await getNearest(sensordata.lat, sensordata.lng)];
+    console.log("item", item, sensordata);
     console.log(data);
     const time=data[0].日時.split("T");
     console.log("time :",time);
@@ -53,7 +58,7 @@ async function water_level(item){
 
     let inner='<h2 class="river-title">河川の状態</h2><h3 class="river-sub-title">対象：'+item.name+' '+watcher+' (※一番近い観測所です。)</h3><p>データ取得日時：'+time[0]+'　'+time[1]+'</p><table border="1"><tr><th>観測所名</th><th>河川水位</th><th>警報状態</th></tr>';
     for (const d of data) {
-        console.log(d.観測所名);
+        console.log(d, d.観測所名);
         if (d.観測所名.match(item.watch)){
             console.log("match");
             let row="<tr>";
@@ -118,3 +123,5 @@ async function water_level(item){
     table.appendChild(div);
     
 }
+
+export { water_level };
